@@ -1,4 +1,4 @@
-type,value,package,tolerance,rating,stock_type,jlcpcb,mouser,description
+type,value,package,tolerance,rating,stock_type,lcsc,mpn,description
 LED,Red,0603,,,basic,C2286,,Red LED 0603
 LED,Green,0603,,,basic,C72043,,Green LED 0603
 LED,Blue,0603,,,basic,C72041,,Blue LED 0603

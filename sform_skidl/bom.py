@@ -101,86 +101,25 @@ class JLCPCBExporter(BOMExporter):
             ",".join(sorted(item.designators)),
             item.footprint,
             str(item.quantity),
-            item.fields.get("jlcpcb", item.fields.get("lcsc", "")),
+            item.fields.get("lcsc", item.fields.get("jlcpcb", "")),
         ]
 
 
-class MouserExporter(BOMExporter):
-    """Mouser BOM format."""
-    name = "mouser"
+class MPNExporter(BOMExporter):
+    """
+    Generic MPN-based BOM format.
+    
+    Output columns: MPN, Quantity, References
+    """
+    name = "mpn"
     
     def get_columns(self) -> list[str]:
-        return ["Mouser Part Number", "Qty", "Customer Ref"]
+        return ["MPN", "Quantity", "References"]
     
     def format_row(self, item: BOMItem) -> list[str]:
         return [
-            item.fields.get("mouser", item.fields.get("mpn", "")),
-            str(item.quantity),
-            ",".join(sorted(item.designators)),
-        ]
-
-
-class DigikeyExporter(BOMExporter):
-    """Digi-Key BOM format."""
-    name = "digikey"
-    
-    def get_columns(self) -> list[str]:
-        return ["Digi-Key Part Number", "Quantity", "Customer Reference"]
-    
-    def format_row(self, item: BOMItem) -> list[str]:
-        return [
-            item.fields.get("digikey", item.fields.get("mpn", "")),
-            str(item.quantity),
-            ",".join(sorted(item.designators)),
-        ]
-
-
-class PCBWayExporter(BOMExporter):
-    """PCBWay BOM format for assembly service."""
-    name = "pcbway"
-    
-    def get_columns(self) -> list[str]:
-        return ["Item", "Designator", "Package", "Quantity", "MPN", "Manufacturer"]
-    
-    def format_row(self, item: BOMItem) -> list[str]:
-        return [
-            item.value,
-            ",".join(sorted(item.designators)),
-            item.footprint,
-            str(item.quantity),
-            item.fields.get("mpn", ""),
-            item.fields.get("manufacturer", ""),
-        ]
-
-
-class ArrowExporter(BOMExporter):
-    """Arrow Electronics BOM format."""
-    name = "arrow"
-    
-    def get_columns(self) -> list[str]:
-        return ["Arrow Part Number", "Manufacturer Part Number", "Qty", "Reference"]
-    
-    def format_row(self, item: BOMItem) -> list[str]:
-        return [
-            item.fields.get("arrow", ""),
             item.fields.get("mpn", ""),
             str(item.quantity),
-            ",".join(sorted(item.designators)),
-        ]
-
-
-class NewarkExporter(BOMExporter):
-    """Newark/element14/Farnell BOM format."""
-    name = "newark"
-    
-    def get_columns(self) -> list[str]:
-        return ["Newark Part Number", "Quantity", "Description", "Reference"]
-    
-    def format_row(self, item: BOMItem) -> list[str]:
-        return [
-            item.fields.get("newark", item.fields.get("farnell", "")),
-            str(item.quantity),
-            f"{item.value} {item.footprint}",
             ",".join(sorted(item.designators)),
         ]
 
@@ -204,13 +143,8 @@ class LCSCExporter(BOMExporter):
 _exporters: dict[str, type[BOMExporter]] = {
     "generic": GenericExporter,
     "jlcpcb": JLCPCBExporter,
-    "mouser": MouserExporter,
-    "digikey": DigikeyExporter,
-    "pcbway": PCBWayExporter,
-    "arrow": ArrowExporter,
-    "newark": NewarkExporter,
-    "farnell": NewarkExporter,  # Alias for newark
     "lcsc": LCSCExporter,
+    "mpn": MPNExporter,
 }
 
 

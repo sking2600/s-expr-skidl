@@ -214,6 +214,27 @@ class TestBOMIntegration:
             # Should have 2 line items (10K x2, 1K x1)
             assert len(rows) == 2
 
+    def test_mpn_export(self):
+        """Test MPN exporter outputs correct field."""
+        import csv
+        from sform_skidl import generate_bom
+        
+        r1 = Part('Device', 'R', value='10K')
+        r1.set_pin_count(2)
+        r1.fields['mpn'] = 'TEST-MPN-123'
+        
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "bom_mpn.csv"
+            generate_bom(str(path), format='mpn')
+            
+            with open(path) as f:
+                reader = csv.reader(f)
+                headers = next(reader)
+                row = next(reader)
+                
+                assert 'MPN' in headers
+                assert row[0] == 'TEST-MPN-123'
+
 
 class TestMultipleVendors:
     """Test multiple vendor BOM export."""

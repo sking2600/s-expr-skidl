@@ -45,45 +45,74 @@ generate_bom("bom.csv", format="jlcpcb")
 
 ## BOM & Vendor Support
 
+### Simplified Columns
+The parts database now exclusively supports:
+- `lcsc`: LCSC Part Number (for JLCPCB Assembly)
+- `mpn`: Manufacturer Part Number (for all other vendors)
+
 ### Quick Start: Bundled Parts Database
 ```python
 # Load 84 common JLCPCB basic parts (resistors, caps, LEDs, ICs)
 db = load_bundled_parts()
 
 r1 = Part('Device', 'R', value='10K', footprint='0603')
-db.apply_to_circuit()  # Auto-resolves to C25804
+db.apply_to_circuit()  # Auto-resolves 'lcsc' and 'mpn' fields
 
 generate_bom('jlcpcb.csv', format='jlcpcb')
+generate_bom('bom.csv', format='mpn')
+```
+
+### Auto-Population Script
+Can be run as a standalone script to verify your database matches:
+```python
+# scripts/auto_populate.py
+from sform_skidl import *
+
+db = load_bundled_parts()
+r1 = Part('Device', 'R', value='10K', footprint='0603')
+
+# Database injects 'lcsc' and 'mpn' fields automatically
+db.apply_to_circuit()
+
+print(f"LCSC: {r1.fields.get('lcsc')}") # -> C25804
 ```
 
 ### Direct Vendor Override (Escape Hatch)
 ```python
 r1 = Part('Device', 'R', value='10K')
-r1.fields['jlcpcb'] = 'C12345'  # Always takes precedence
-r1.fields['mouser'] = '603-RC0603FR-0710KL'
+r1.fields['lcsc'] = 'C12345'  # Always takes precedence
+r1.fields['mpn'] = 'RC0603FR-0710KL'
 ```
 
-### Supported Vendors (9)
+### Supported Formats
 ```python
 list_exporters()
-# → ['generic', 'jlcpcb', 'mouser', 'digikey', 'pcbway', 
-#    'arrow', 'newark', 'farnell', 'lcsc']
+# → ['generic', 'jlcpcb', 'lcsc', 'mpn']
 ```
+
+| Format | Primary Use Case | Key Column | Includes Designators? |
+| :--- | :--- | :--- | :--- |
+| **`jlcpcb`** | **PCB Assembly** (JLCPCB) | `LCSC Part #` | ✅ Yes (Required for placement) |
+| **`lcsc`** | **Purchasing Parts** (LCSC) | `LCSC Part #` | ❌ No (Just Quantity & Ref) |
+| **`mpn`** | **Purchasing Parts** (Mouser, etc.)| `MPN` | ❌ No (Just Quantity & Ref) |
+| **`generic`**| **Review / Documentation** | `MPN` + Details | ✅ Yes (Full Detail) |
+
+#### Format Details
+*   **`jlcpcb`**: Used for uploading to JLCPCB's assembly service. Includes designators (e.g. `R1`, `C3`) so placement machines know where to put the part `C25804`.
+*   **`lcsc`**: Used for ordering parts from LCSC.com. Optimized for purchasing agents who just need the part number and total quantity.
+*   **`mpn`**: Used for "BOM Import" tools on sites like **Mouser** or **DigiKey**. Provides the Manufacturer Part Number and quantity for quick ordering.
+*   **`generic`**: Full documentation including Value, Footprint, and Manufacturer. Useful for manual verification (e.g. checking that `RC0603...` is actually a 10K resistor).
 
 ### Custom Parts Database
 ```python
 db = PartsDatabase()
-db.add('R', '10K', '0603', stock_type='basic', jlcpcb='C25804')
-db.add('C', '100nF', '0402', tolerance='10%', jlcpcb='C1525')
-
-# Filter by stock type
-db.apply_to_circuit(stock_type='basic')
+db.add('R', '10K', '0603', stock_type='basic', lcsc='C25804', mpn='RC0603FR...')
 ```
 
 ### Load from CSV
 ```python
 db = load_parts_db('my_parts.csv')
-# CSV: type,value,package,tolerance,stock_type,jlcpcb,mouser
+# CSV: type,value,package,tolerance,stock_type,lcsc,mpn
 ```
 
 ### BOM Reduction
@@ -142,7 +171,7 @@ no_connect(u1['PA5'])  # Alternative syntax
 | Function | Description |
 |----------|-------------|
 | `generate_schematic(path, title, rev, ...)` | Generate `.kicad_sch` with metadata |
-| `generate_bom(path, format)` | Generate vendor BOM |
+| `generate_bom(path, format)` | Generate BOM (concise formats: `jlcpcb`, `mpn`, `generic`) |
 | `reduce_bom(apply=False)` | Preview/apply BOM consolidation |
 | `auto_discover_libs()` | Find KiCad libraries |
 | `search_parts(pattern)` | Search all libraries |

@@ -125,7 +125,9 @@ class PartsDatabase:
         tolerance: str = "",
         rating: str = "",
         stock_type: str = "any",
-        **vendors,
+        lcsc: str = "",
+        mpn: str = "",
+        **kwargs,  # Catch-all for legacy/extra fields, but explicit args are preferred
     ):
         """
         Add a part to the database.
@@ -137,8 +139,19 @@ class PartsDatabase:
             tolerance: Tolerance ('1%', '5%')
             rating: Voltage/power rating ('50V', '0.1W')
             stock_type: 'basic', 'extended', or 'any'
-            **vendors: Vendor part numbers (jlcpcb='C25804', mouser='...')
+            lcsc: LCSC Part # (for JLCPCB)
+            mpn: Manufacturer Part # (for Mouser, DigiKey, etc.)
         """
+        vendors = {}
+        if lcsc:
+            vendors['lcsc'] = lcsc
+            vendors['jlcpcb'] = lcsc  # Alias for backward compat in BOM exporters
+        if mpn:
+            vendors['mpn'] = mpn
+        
+        # Add any extra fields from kwargs, but we primarily support lcsc/mpn
+        vendors.update(kwargs)
+        
         spec = PartSpec(
             type=type,
             value=value,
@@ -286,7 +299,9 @@ class PartsDatabase:
             reader = csv.DictReader(f)
             for row in reader:
                 vendors = {}
-                core_fields = {'type', 'value', 'package', 'tolerance', 'rating'}
+                # Core fields handled explicitly in self.add()
+                core_fields = {'type', 'value', 'package', 'tolerance', 'rating', 
+                             'lcsc', 'mpn', 'jlcpcb', 'mouser'}
                 for key, val in row.items():
                     if key not in core_fields and val:
                         vendors[key] = val
@@ -297,6 +312,8 @@ class PartsDatabase:
                     package=row.get('package', ''),
                     tolerance=row.get('tolerance', ''),
                     rating=row.get('rating', ''),
+                    lcsc=row.get('lcsc', row.get('jlcpcb', '')),
+                    mpn=row.get('mpn', row.get('mouser', '')),
                     **vendors,
                 )
     
