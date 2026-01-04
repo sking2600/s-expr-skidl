@@ -1,0 +1,103 @@
+type,value,package,tolerance,rating,stock_type,jlcpcb,mouser,description
+# Op-Amps
+IC,LM358,SOP-8,,,basic,C7945,,Dual Op-Amp
+IC,LM324,TSSOP-14,,,basic,C7946,,Quad Op-Amp
+IC,LM2902,TSSOP-14,,,basic,C7947,,Quad Op-Amp Industrial
+IC,TL072,SOP-8,,,basic,C6961,,Dual J-FET Op-Amp Low Noise
+IC,TL074,SOP-14,,,basic,C29466,,Quad J-FET Op-Amp Low Noise
+IC,TL082,SOP-8,,,basic,C6970,,Dual J-FET Op-Amp
+IC,NE5532,SOP-8,,,basic,C7955,,Dual Low-Noise Op-Amp Audio
+IC,OPA2340,SOP-8,,,extended,C129912,,Dual Rail-to-Rail CMOS Op-Amp
+IC,OPA2134,SOP-8,,,extended,C129913,,Dual Audio Op-Amp Hi-Fi
+IC,MCP6002,SOP-8,,,basic,C7377,,Dual 1MHz Rail-to-Rail
+IC,MCP6022,SOP-8,,,extended,C131512,,Dual 10MHz Rail-to-Rail
+IC,LMV358,SOP-8,,,basic,C7956,,Dual Low Voltage Op-Amp
+IC,SGM8541,SOT-23-5,,,basic,C80648,,Single Rail-to-Rail
+IC,SGM8542,SOP-8,,,basic,C80649,,Dual Rail-to-Rail
+# Linear Regulators
+IC,AMS1117-3.3,SOT-223,,,basic,C6186,,3.3V LDO 1A
+IC,AMS1117-5.0,SOT-223,,,basic,C6187,,5V LDO 1A
+IC,AMS1117-1.8,SOT-223,,,basic,C6185,,1.8V LDO 1A
+IC,AMS1117-1.2,SOT-223,,,basic,C6184,,1.2V LDO 1A
+IC,AMS1117-ADJ,SOT-223,,,basic,C6188,,Adjustable LDO 1A
+IC,ME6211C33,SOT-23-5,,,basic,C82942,,3.3V LDO 500mA Low Iq
+IC,ME6211C18,SOT-23-5,,,basic,C82941,,1.8V LDO 500mA Low Iq
+IC,XC6206P332MR,SOT-23,,,basic,C5446,,3.3V LDO 200mA Low Iq
+IC,XC6206P182MR,SOT-23,,,basic,C5447,,1.8V LDO 200mA Low Iq
+IC,RT9193-33GB,SOT-23-5,,,basic,C15651,,3.3V LDO 300mA
+IC,RT9193-18GB,SOT-23-5,,,basic,C15650,,1.8V LDO 300mA
+IC,TLV1117LV33,SOT-223,,,basic,C15578,,3.3V LDO 1A Low Dropout
+IC,AP2112K-3.3,SOT-23-5,,,basic,C51118,,3.3V LDO 600mA
+IC,AP2112K-1.8,SOT-23-5,,,basic,C51117,,1.8V LDO 600mA
+IC,LM7805,TO-220,,,basic,C347376,,5V Linear 1.5A
+IC,LM7803,TO-220,,,basic,C347375,,3.3V Linear 1.5A
+IC,LM7812,TO-220,,,basic,C347378,,12V Linear 1.5A
+IC,LM317,TO-220,,,basic,C347384,,Adjustable 1.5A
+IC,L78L05,SOT-89,,,basic,C106245,,5V Linear 100mA
+IC,L78L33,SOT-89,,,basic,C106244,,3.3V Linear 100mA
+# N-Channel MOSFETs
+IC,2N7002,SOT-23,,,basic,C8545,,N-Ch 60V 300mA
+IC,SI2302,SOT-23,,,basic,C10487,,N-Ch 20V 2.6A
+IC,AO3400A,SOT-23,,,basic,C20917,,N-Ch 30V 5.7A
+IC,AO3402,SOT-23,,,basic,C181082,,N-Ch 30V 4A
+IC,BSS138,SOT-23,,,basic,C3665,,N-Ch 50V 200mA Logic Level
+IC,IRLML2502,SOT-23,,,basic,C144339,,N-Ch 20V 4.2A Logic Level
+IC,IRLML6344,SOT-23,,,basic,C92478,,N-Ch 30V 5A Logic Level
+IC,NCE3400K,TO-252,,,basic,C82063,,N-Ch 30V 10A TO-252
+IC,IRFZ44N,TO-220,,,basic,C6418,,N-Ch 55V 49A
+IC,IRF540N,TO-220,,,basic,C4499,,N-Ch 100V 33A
+IC,IRLZ44N,TO-220,,,basic,C6420,,N-Ch 55V 41A Logic Level
+# P-Channel MOSFETs
+IC,SI2301,SOT-23,,,basic,C10492,,P-Ch -20V -2.3A
+IC,AO3401A,SOT-23,,,basic,C15127,,P-Ch -30V -4A
+IC,BSS84,SOT-23,,,basic,C18253,,P-Ch -50V -130mA
+IC,IRLML6402,SOT-23,,,basic,C139549,,P-Ch -20V -3.7A Logic Level
+IC,DMP3099L,SOT-23,,,basic,C132310,,P-Ch -30V -3A
+IC,IRF9540N,TO-220,,,basic,C6421,,P-Ch -100V -23A
+# NPN Transistors
+IC,MMBT3904,SOT-23,,,basic,C20526,,NPN 40V 200mA General Purpose
+IC,2N3904,TO-92,,,basic,C181093,,NPN 40V 200mA General Purpose
+IC,S8050,SOT-23,,,basic,C2146,,NPN 25V 500mA
+IC,S9013,SOT-23,,,basic,C6749,,NPN 25V 500mA
+IC,BC847,SOT-23,,,basic,C8574,,NPN 45V 100mA
+IC,BC817,SOT-23,,,basic,C8586,,NPN 45V 500mA
+IC,2N2222A,TO-92,,,basic,C358533,,NPN 40V 600mA
+IC,TIP31C,TO-220,,,basic,C9057,,NPN 100V 3A Power
+# PNP Transistors
+IC,MMBT3906,SOT-23,,,basic,C20527,,PNP -40V -200mA General Purpose
+IC,2N3906,TO-92,,,basic,C181094,,PNP -40V -200mA General Purpose
+IC,S8550,SOT-23,,,basic,C17313,,PNP -25V -500mA
+IC,S9012,SOT-23,,,basic,C6750,,PNP -25V -500mA
+IC,BC857,SOT-23,,,basic,C8602,,PNP -45V -100mA
+IC,BC807,SOT-23,,,basic,C8580,,PNP -45V -500mA
+IC,TIP32C,TO-220,,,basic,C9065,,PNP -100V -3A Power
+# Timers and References
+IC,NE555,SOP-8,,,basic,C7524,,555 Timer
+IC,LMC555,SOP-8,,,basic,C127337,,CMOS 555 Timer Low Power
+IC,TL431,SOT-23,,,basic,C2999,,Adjustable Voltage Reference
+IC,LM385,SOT-23,,,basic,C87218,,1.235V Micropower Reference
+IC,LM4040-2.5,SOT-23,,,basic,C460720,,2.5V Precision Reference
+# Logic ICs
+IC,74HC595,SOP-16,,,basic,C5948,,Shift Register 8-bit
+IC,74HC165,SOP-16,,,basic,C5614,,Parallel-to-Serial 8-bit
+IC,74HC245,SOP-20,,,basic,C5935,,Octal Bus Transceiver
+IC,74HC04,SOP-14,,,basic,C5952,,Hex Inverter
+IC,74HC14,SOP-14,,,basic,C5953,,Hex Schmitt Trigger Inverter
+IC,74HC00,SOP-14,,,basic,C5954,,Quad 2-Input NAND
+IC,74HC32,SOP-14,,,basic,C5955,,Quad 2-Input OR
+IC,74HC08,SOP-14,,,basic,C5956,,Quad 2-Input AND
+# Interface ICs
+IC,CH340C,SOP-16,,,basic,C84681,,USB to UART
+IC,CH340G,SOP-16,,,basic,C14267,,USB to UART Crystal
+IC,CP2102,QFN-28,,,extended,C6568,,USB to UART Silicon Labs
+IC,MAX232,SOP-16,,,basic,C6539,,RS-232 Transceiver
+IC,SP3485,SOP-8,,,basic,C9981,,RS-485 Transceiver 3.3V
+IC,MAX485,SOP-8,,,basic,C6540,,RS-485 Transceiver 5V
+# Memory ICs
+IC,W25Q64JVSIQ,SOP-8,,,basic,C179171,,64Mbit SPI Flash
+IC,W25Q128JVSIQ,SOP-8,,,basic,C97521,,128Mbit SPI Flash
+IC,W25Q32JVSIQ,SOP-8,,,basic,C571134,,32Mbit SPI Flash
+IC,24C02,SOP-8,,,basic,C64719,,2Kbit I2C EEPROM
+IC,24C64,SOP-8,,,basic,C6892,,64Kbit I2C EEPROM
+IC,24C128,SOP-8,,,basic,C46234,,128Kbit I2C EEPROM
+IC,24C256,SOP-8,,,basic,C6891,,256Kbit I2C EEPROM
